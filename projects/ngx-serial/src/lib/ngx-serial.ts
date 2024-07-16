@@ -30,8 +30,8 @@ export class NgxSerial {
       while (this.port.readable && this.keepReading ) {
         const textDecoder = new TextDecoderStream();
         this.readableStreamClosed = this.port.readable.pipeTo(textDecoder.writable);
-        this.reader = textDecoder.readable
-          .pipeThrough(new TransformStream(new LineBreakTransformer(this.controlCharacter)))
+        this.reader = this.port.readable //textDecoder.readable
+          //.pipeThrough(new TransformStream(new LineBreakTransformer(this.controlCharacter)))
           .getReader();
   
         try {
